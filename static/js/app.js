@@ -12,6 +12,26 @@ function DropBox(data,Select_ID)
     };
 
 
+    function Ploting (SelectedID)
+    {
+    // d3.selectAll("#selDataset").on("change", updatePlotly);
+    
+    
+    // var SelectedID="940";
+    
+    
+    var SelectedID_Data = Sample_samples.filter(smpl => smpl.id ===SelectedID);
+    console.log(SelectedID_Data[0]);
+    var SelectedID_MetaData=Sample_MetaData.filter(smpl => smpl.id===parseInt(SelectedID));
+    console.log(SelectedID_MetaData[0].wfreq);
+    
+    if (SelectedID_Data.length===0)
+         { console.log("Not found")}
+    else
+     Dashbord_update (SelectedID_Data[0],SelectedID_MetaData[0]);
+      
+     
+    }
 
 
 
@@ -22,9 +42,9 @@ function DropBox(data,Select_ID)
     var ID_out_labels= SelectedID_Data.otu_labels;
     console.log(ID_sample_values);
     console.log(ID_otu_ids);
+    Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels);
     Bar_chart(ID_otu_ids,ID_sample_values);
     Demographic_Info(SelectedID_MetaData);
-    Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels);
     buildGauge(SelectedID_MetaData.wfreq);
     }
 
@@ -32,77 +52,29 @@ function DropBox(data,Select_ID)
     {
       var info_panel = d3.select("#sample-metadata");
 
-      // Use `.html("") to clear any existing metadata
       info_panel.html("");
   
-      // Use `Object.entries` to add each key and value pair to the panel
-      // Hint: Inside the loop, you will need to use d3 to append new
-      // tags for each key-value in the metadata.
-      // Object.entries(SelectedID_MetaData).forEach(([key, value]) => {
-      //   PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
-      // });
       console.log (Object.entries(SelectedID_MetaData)[1]);
+
       var info_array=Object.entries(SelectedID_MetaData);
+
       for (i=0; i<info_array.length;i++)
       {
         var ID=info_array[i][0];
         var INFO=info_array[i][1];
 
         info_panel.append("h6").text(`${ID.toUpperCase()}: ${INFO}`);
-    console.log (info_array[i][0]);
-    console.log (info_array[i][1]);
+      // console.log (info_array[i][0]);
+      // console.log (info_array[i][1]);
 
     }
     }
 
 
-    function Bar_chart(ID_otu_ids,ID_sample_values)
-    {
-    x_values=[];
-    y_values=[];
-    for (var i=0 ; i<10 ;i++)
-    {
-        y_values[i]="OUT "+ID_otu_ids[9-i];
-        x_values[i]=ID_sample_values[9-i];
-    }
-        console.log(y_values);
-    
-    var trace1 = {
-        x:x_values ,
-        y: y_values,
-        text: y_values.map(String),
-            name: "yyyyy",
-        type: "bar",
-        orientation: "h"
-      };
-       // data
-       var Bar_chart_Data = [trace1];
-    
-       // Apply the group bar mode to the layout
-       var bar_layout = {
-        title: 'xxxxxxxx',
-        font:{
-          family: 'Raleway, sans-serif'
-        },
-        showlegend: false,
-        xaxis: {
-          tickangle: -45
-        },
-        yaxis: {
-          zeroline: false,
-          gridwidth: 2
-        },
-        bargap :0.05,     
-    
-       };
-     
-      // Render the plot to the div tag with id "plot"
-      Plotly.newPlot("bar", Bar_chart_Data, bar_layout);
-      }
-
-    function Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels)
-    {
     var Color=[];
+    var length_otu;
+    function Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels)
+    { length_otu=ID_otu_ids.length;
     for (var i=0 ; i<ID_otu_ids.length ;i++)
     {
         var x = Math. floor(Math. random() * 256);
@@ -114,8 +86,7 @@ function DropBox(data,Select_ID)
     }
     
     console.log(Color);
-    console.log(Color);
-    
+ 
     
     var trace2 = {
         x: ID_otu_ids ,
@@ -145,35 +116,93 @@ function DropBox(data,Select_ID)
     }
     
 
+    function Bar_chart(ID_otu_ids,ID_sample_values)
+    {
+    var coolor = []
 
-d3.json("https://raw.githubusercontent.com/nima-karimii/Plotly-JS-Challenge/master/static/data/samples.json").then((importedData) => {
+    x_values=[];
+    y_values=[];
+    for (var i=0 ; i<10 ;i++)
+    {
+        y_values[i]="OUT "+ID_otu_ids[9-i];
+        x_values[i]=ID_sample_values[9-i];
+        coolor[9-i]=Color[i];
+        // console.log(y_values[i]);
+        // console.log(coolor[i]);
+
+
+    }
+    console.log(Color);
+    console.log(coolor);
+        console.log(y_values);
+    
+    var trace1 = {
+        x:x_values ,
+        y: y_values,
+        text: y_values.map(String),
+        type: "bar",
+        orientation: "h",
+        marker: {
+          color:coolor
+        }
+      };
+       // data
+       var Bar_chart_Data = [trace1];
+    
+       // Apply the group bar mode to the layout
+       var bar_layout = {
+        title: 'Top 10 Bactries',
+       font: {
+    family: 'Courier New, monospace',
+    size: 12,
+    color: '#7f7f7f'
+        },
+        showlegend: false,
+        xaxis: {
+        },
+        yaxis: {
+          gridwidth:2
+        },
+        bargap :0.15,     
+    
+       };
+     
+      // Render the plot to the div tag with id "plot"
+      Plotly.newPlot("bar", Bar_chart_Data, bar_layout);
+      }
+
+    function optionChanged(ID) {
+      // Use D3 to select the dropdown menu
+      var dropdownMenu = d3.select("#selDataset");
+      // Assign the value of the dropdown menu option to a variable
+      var dataset = dropdownMenu.property("value");
+      console.log(dataset);
+      console.log(ID);
+      Ploting(ID);
+    }
+
+
+var data,Sample_IDs,Sample_MetaData,Sample_samples;
+
+d3.json("https://raw.githubusercontent.com/nima-karimii/Plotly-JS-Challenge/master/static/data/samples.json").then((importedData) => 
+{
     // console.log(importedData);
-    var data = importedData;
+data = importedData;
 //    console.log(data);
 
-var Sample_IDs=data.names;
+Sample_IDs=data.names;
 // console.log(Sample_IDs);
 
-var Sample_MetaData=data.metadata;
+Sample_MetaData=data.metadata;
 // console.log(Sample_MetaData);
-DropBox(Sample_IDs,"selDataset");
 
-var Sample_samples=data.samples;
+Sample_samples=data.samples;
 //  console.log(Sample_samples);
 
-var SelectedID="940";
+DropBox(Sample_IDs,"selDataset");
 
+var defaultID="940";
 
-var SelectedID_Data = Sample_samples.filter(smpl => smpl.id ===SelectedID);
-console.log(SelectedID_Data[0]);
-var SelectedID_MetaData=Sample_MetaData.filter(smpl => smpl.id===parseInt(SelectedID));
-console.log(SelectedID_MetaData[0].wfreq);
+Ploting (defaultID);
 
-if (SelectedID_Data.length===0)
-     { console.log("Not found")}
-else
- Dashbord_update (SelectedID_Data[0],SelectedID_MetaData[0]);
-  
- 
-
-})
+  })
