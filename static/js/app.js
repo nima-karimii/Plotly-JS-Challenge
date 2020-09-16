@@ -33,7 +33,7 @@ function DropBox(data,Select_ID)
      
     }
 
-
+    
 
   function Dashbord_update(SelectedID_Data,SelectedID_MetaData)
     {
@@ -62,8 +62,10 @@ function DropBox(data,Select_ID)
       {
         var ID=info_array[i][0];
         var INFO=info_array[i][1];
+        infoDemo= ID.toUpperCase()+':  '+ INFO;
+        title=info_panel.append("h5").text(infoDemo)
 
-        info_panel.append("h6").text(`${ID.toUpperCase()}: ${INFO}`);
+        // title.append("h4").text(`: ${INFO}`);
       // console.log (info_array[i][0]);
       // console.log (info_array[i][1]);
 
@@ -75,6 +77,7 @@ function DropBox(data,Select_ID)
     var length_otu;
     function Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels)
     { length_otu=ID_otu_ids.length;
+
     for (var i=0 ; i<ID_otu_ids.length ;i++)
     {
         var x = Math. floor(Math. random() * 256);
@@ -107,7 +110,10 @@ function DropBox(data,Select_ID)
         showlegend: false,
         hovermode:'closest',
         height: 600,
-        width: 1200
+        width: 1100,
+        paper_bgcolor:'rgba(0,0,0,0)',
+    plot_bgcolor:'rgba(0,0,0,0)'
+
       };
       
       Plotly.newPlot('bubble', buble_data, layout);
@@ -139,6 +145,7 @@ function DropBox(data,Select_ID)
     var trace1 = {
         x:x_values ,
         y: y_values,
+        
         text: y_values.map(String),
         type: "bar",
         orientation: "h",
@@ -151,27 +158,31 @@ function DropBox(data,Select_ID)
     
        // Apply the group bar mode to the layout
        var bar_layout = {
-        title: 'Top 10 Bactries',
-       font: {
-    family: 'Courier New, monospace',
-    size: 12,
-    color: '#7f7f7f'
-        },
+        title: { text: "<b>TOP 10 BACTERIAS</b> <br> ",
+
+                  font: {
+                  family: 'Courier New, monospace',
+                  size: 24,
+        }
+      },
         showlegend: false,
         xaxis: {
+          gridwidth:1,
+          font: {size: 50}
         },
         yaxis: {
-          gridwidth:2
+          gridwidth:1
         },
         bargap :0.15,     
-    
-       };
-     
+        plot_bgcolor:'rgba(0,0,0,0)',
+          paper_bgcolor:'rgba(0,0,0,0)'
+
+      }
       // Render the plot to the div tag with id "plot"
       Plotly.newPlot("bar", Bar_chart_Data, bar_layout);
       }
 
-    function optionChanged(ID) {
+  function optionChanged(ID) {
       // Use D3 to select the dropdown menu
       var dropdownMenu = d3.select("#selDataset");
       // Assign the value of the dropdown menu option to a variable
@@ -184,7 +195,7 @@ function DropBox(data,Select_ID)
 
 var data,Sample_IDs,Sample_MetaData,Sample_samples;
 
-d3.json("https://raw.githubusercontent.com/nima-karimii/Plotly-JS-Challenge/master/static/data/samples.json").then((importedData) => 
+d3.json("static/data/samples.json").then((importedData) => 
 {
     // console.log(importedData);
 data = importedData;

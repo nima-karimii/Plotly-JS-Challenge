@@ -6,33 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bellybutton Biodiversity</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: aliceblue;">
 
-  <div class="container">
+  <div class="container" style="background-color: rgb(222, 232, 241);" >
     <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-        <h1>Belly Button Biodiversity Dashboard</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+      <div class="col-md-12 jumbotron text-center"  style=" background-image:  url('https://www.rmit.edu.au/content/dam/rmit/au/en/study-with-us/interest-areas/mastheads/science-study-area-1920x600.jpg'); background-position:center; background-size: 100% 150%">
+        <h1 style="color: rgb(82, 125, 219); text-decoration:underline; text-shadow : 2px 2px 5px red">Belly Button Biodiversity Dashboard</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
-        <div class="well">
-          <h5>Test Subject ID No.:</h5>
+      <div class="col-md-3">
+        <div class="card bg-light mb-3">
+          <h5 class="card-header"><b>Test Subject ID No.:</b></h5>
           <select id="selDataset" onchange="optionChanged(this.value)">
           </select>
         </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Demographic Info</h3>
-          </div>
-          <div id="sample-metadata" class="panel-body"></div>
+        <div class=" card bg-light mb-3">
+            <h5 class="card-header"><b>Demographic Info</b></h5>
+          <div id="sample-metadata" class="card-title" style="font-family:'Courier New', Courier, monospace; "></div>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div id="bar"></div>
       </div>
       <div class="col-md-5">
