@@ -20,34 +20,23 @@ The Dashboard can be viewed [ https://nima-karimii.github.io/Plotly-JS-Challenge
 
 
 
-3. Create a bubble chart that displays each sample.
+3. I create a bubble chart that displays each sample.
 
 ![Bubble Chart](Images/bubble_chart.png)
 
-4. Display the sample metadata, i.e., an individual's demographic information.
-
-5. Display each key-value pair from the metadata JSON object somewhere on the page.
+4. I displayed the sample metadata, i.e., an individual's demographic information on the page
 
 ![hw](Images/hw03.png)
 
-6. Update all of the plots any time that a new sample is selected.
+6.The page will refresh all of the plots any time that a new sample is selected.
 
+![hw](Images/Dashboard.PNG)
 
-![hw](Images/Dashboard.PNG.png)
-
-## Advanced Challenge Assignment (Optional)
-
-The following task is advanced and therefore optional.
-
-* Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
-
-* You will need to modify the example gauge code to account for values ranging from 0 through 9.
-
-* Update the chart whenever a new sample is selected.
+7.I adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual. I used 3 plots from Plotly to show this gauge with arrow ; "Gauge", "Path" and "Scater".
 
 ![Weekly Washing Frequency Gauge](Images/gauge.png)
 
-
+### Hope you enjoy it.
 
 ### About the Data
 
