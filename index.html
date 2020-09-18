@@ -11,33 +11,33 @@
 
 <body style="background-color: aliceblue;">
 
-  <div class="container" style="background-color: rgb(222, 232, 241);" >
+  <div class="container-fluid bg-info"  >
     <div class="row">
-      <div class="col-md-12 jumbotron text-center"  style=" background-image:  url('https://www.rmit.edu.au/content/dam/rmit/au/en/study-with-us/interest-areas/mastheads/science-study-area-1920x600.jpg'); background-position:center; background-size: 100% 150%">
+      <div class="col-md-12 col-lg-12 jumbotron text-center"  style=" background-image:  url('https://www.cedars-sinai.org/content/dam/cedars-sinai/blog/2020/06/viruses-bacteria-fungi.jpg'); background-position:center; background-size: 100% 200%">
         <h1 style="color: rgb(82, 125, 219); text-decoration:underline; text-shadow : 2px 2px 5px red">Belly Button Biodiversity Dashboard</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3">
-        <div class="card bg-light mb-3">
-          <h5 class="card-header"><b>Test Subject ID No.:</b></h5>
+      <div class="col-md-3 col-xl-2">
+        <div class="card text-white bg-success mb-3">
+          <h5 class="card-header"><b>Test Subject ID :</b></h5>
           <select id="selDataset" onchange="optionChanged(this.value)">
           </select>
         </div>
-        <div class=" card bg-light mb-3">
+        <div class=" card text-white bg-primary mb-3">
             <h5 class="card-header"><b>Demographic Info</b></h5>
           <div id="sample-metadata" class="card-title" style="font-family:'Courier New', Courier, monospace; "></div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5 col-xl-5 bg-info-500" >
         <div id="bar"></div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4 col-xl-5 bg-info">
         <div id="gauge"></div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 col-xl-12">
         <div id="bubble"></div>
       </div>
     </div>

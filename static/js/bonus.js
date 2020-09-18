@@ -1,8 +1,21 @@
-function buildGauge(wfreq) {
+
+/// We drowning the gauge whit 3 plots:
+/// 1- "Gauge" plot from Plotly for showing the Steeps
+/// 2- "Scater" plot for center of gauge 
+/// 3- "Path" for drawing the arrows
+
+function buildGauge(frqwashing) {
+
+
+  if (frqwashing===null) frqwashing=0;
+  else frqwashing=parseInt(frqwashing);
+  
+  ////////////////////Setting up gauge Steps
+
   var gauge_trace = 
     {
       domain: { x: [0, 1], y: [0, 1] },
-      value: wfreq,
+      value: frqwashing,
       title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week",
              font: { size: 24 ,
              family: 'Courier New, monospace',
@@ -34,32 +47,27 @@ function buildGauge(wfreq) {
         threshold: {
           line: { color: "white", width: 5 },
           thickness: 0.75,
-          value: wfreq
+          value: frqwashing
         }
       }
     };
   
-  // var layout = { width: 450, 
-  //   height: 400, 
-  //   margin: { t: 0, b: 0 } ,
-  //   paper_bgcolor:'rgba(0,0,0,0)',
-  //   // plot_bgcolor:'rgba(0,0,0,0)'
-  // };
-  // Plotly.newPlot('gauge', data, layout);
+///////Setting up the Arrow by 2 plots ( Scater and Path )
 
+/// Coordinating the 3 points for Arrow 
 
-// Enter the washing frequency between 0 and 180
-var level = parseInt(wfreq) * 18;
+// Converting "frqwashing" to degree (0-180)
+var level = parseInt(frqwashing) * 18;
   
 // Trig to calc meter point
-var degrees = 180 - level;
-var radius = 0.7;
-var radians = (degrees * Math.PI) / 180;
-var x = radius * Math.cos(radians);
-var y = radius * Math.sin(radians)-0.5;
+var Pointer_degrees = 180 - level;
+var Pointer = 0.7;
+var radians = (Pointer_degrees * Math.PI) / 180;
+var x = Pointer * Math.cos(radians);
+var y = Pointer * Math.sin(radians)-0.5;
 
-// Path: may have to change to create a better triangle
-var mainPath = "M -.0 -0.6 L -.0 -0.5 L ";
+/// Setting up the Path plot
+var mainPath = "M -.02 -0.8 L .03 -0.8 L ";
 var pathX = String(x);
 var space = " ";
 var pathY = String(y);
@@ -70,11 +78,12 @@ var pointer_trace =
   {
     type: "scatter",
     x: [0],
-    y: [-0.5],
-    marker: { size: 1, color: "850000" },
+    y: [-.8],
+    marker: { size: 20, color: "850000" },
     showlegend: false,
     text: 'none',
   };
+
   var layout = {
     shapes: [
       {
@@ -86,8 +95,8 @@ var pointer_trace =
         }
       }
     ],
-    width: 450, 
-    height: 450, 
+    width: 600 , 
+    height: 500, 
     xaxis: {
       zeroline: false,
       showticklabels: false,
@@ -109,8 +118,6 @@ var pointer_trace =
 data=[gauge_trace,pointer_trace]
 
     Plotly.newPlot("gauge", data, layout);
-
-
 
 
 
