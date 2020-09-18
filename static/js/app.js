@@ -180,6 +180,9 @@ function Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels)
       xaxis: {
         title: "OTU-ID"
               },
+      yaxis: {
+        title: "Sample_value"
+             },
       paper_bgcolor:'rgba(0,0,0,0)',
       plot_bgcolor:'rgba(0,0,0,0)'
 
@@ -238,10 +241,15 @@ function Bubble_Chart(ID_otu_ids,ID_sample_values,ID_out_labels)
         showlegend: false,
         xaxis: {
           gridwidth:1,
-          font: {size: 50}
+          font: {size: 50},
+          title: "Sample_value"
         },
+
+
         yaxis: {
-          gridwidth:1
+          gridwidth:1,
+          title: "OTU-ID"
+
         },
         bargap :0.15,     
         plot_bgcolor:'rgba(0,0,0,0)',
